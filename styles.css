@@ -1,0 +1,66 @@
+@import url("http://139.62.210.181/default.css");
+
+/* You will use this CSS file for each of your projects. Simply add new CSS selectors below. */
+
+/* Be careful to keep your selector names unique to avoid collisions, which can cause unexpected behavior. */
+
+/* DO NOT MODIFY OR REMOVE THE @import STATEMENT ABOVE */
+/* ----------------------------------------- */
+.center {
+    text-align: center;
+}
+
+.left {
+    text-align: left;
+}
+
+#dataTable {
+    border-collapse: collapse;
+}
+
+#dataTable th, #dataTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#dataTable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.cursor-pointer:hover {
+    color: #007bff;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+input[disabled], select[disabled] {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+
+.overflow-x-auto {
+    overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+    .grid-cols-2 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .md\:grid-cols-3 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}

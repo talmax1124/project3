@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="container mx-auto p-6">
+        <h2 class="text-3xl font-bold text-center mb-8">Data Management</h2>
+        
+        <div class="mb-8 p-4 border border-gray-300 rounded-lg">
+            <h3 class="text-xl font-semibold mb-4">Data File</h3>
+            <button id="fileButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
+                Open Data File
+            </button>
+            <input type="file" id="inputFile" style="display: none;" accept=".csv,.txt">
+        </div>
+
+        <div class="mb-8 p-4 border border-gray-300 rounded-lg">
+            <h3 class="text-xl font-semibold mb-4">Statistics</h3>
+            <button id="statisticsButton" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-4">
+                Display Statistics
+            </button>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div>
+                    <label for="max" class="block text-sm font-medium text-gray-700">Max</label>
+                    <input type="text" id="max" readonly disabled class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
+                </div>
+                <div>
+                    <label for="mean" class="block text-sm font-medium text-gray-700">Mean</label>
+                    <input type="text" id="mean" readonly disabled class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
+                </div>
+                <div>
+                    <label for="median" class="block text-sm font-medium text-gray-700">Median</label>
+                    <input type="text" id="median" readonly disabled class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
+                </div>
+                <div>
+                    <label for="min" class="block text-sm font-medium text-gray-700">Min</label>
+                    <input type="text" id="min" readonly disabled class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
+                </div>
+                <div>
+                    <label for="mode" class="block text-sm font-medium text-gray-700">Mode</label>
+                    <input type="text" id="mode" readonly disabled class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
+                </div>
+                <div>
+                    <label for="stdDev" class="block text-sm font-medium text-gray-700">Std Dev</label>
+                    <input type="text" id="stdDev" readonly disabled class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
+                </div>
+                <div>
+                    <label for="sum" class="block text-sm font-medium text-gray-700">Sum</label>
+                    <input type="text" id="sum" readonly disabled class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
+                </div>
+                <div>
+                    <label for="variance" class="block text-sm font-medium text-gray-700">Variance</label>
+                    <input type="text" id="variance" readonly disabled class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-8 p-4 border border-gray-300 rounded-lg">
+            <h3 class="text-xl font-semibold mb-4">Search</h3>
+            <button id="searchButton" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded mb-4">
+                Search Records
+            </button>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label for="searchType" class="block text-sm font-medium text-gray-700">Search Type</label>
+                    <select id="searchType" disabled class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
+                        <option value="">Select Type</option>
+                        <option value="number">U#</option>
+                        <option value="firstName">First Name</option>
+                        <option value="lastName">Last Name</option>
+                        <option value="state">State</option>
+                        <option value="major">Major</option>
+                        <option value="testScore">Test Score</option>
+                        <option value="testDate">Test Date</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="searchCondition" class="block text-sm font-medium text-gray-700">Search Condition</label>
+                    <select id="searchCondition" disabled class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
+                        <option value="">Select Condition</option>
+                        <option value="exact">Exact Match</option>
+                        <option value="contains">Contains</option>
+                        <option value="equal">Equal To</option>
+                        <option value="less">Less Than</option>
+                        <option value="greater">Greater Than</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="searchString" class="block text-sm font-medium text-gray-700">Search String</label>
+                    <input type="text" id="searchString" disabled class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-8 p-4 border border-gray-300 rounded-lg">
+            <h3 class="text-xl font-semibold mb-4">Student Records</h3>
+            <div class="overflow-x-auto">
+                <table id="dataTable" class="min-w-full bg-white border border-gray-200">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-4 py-2 border-b text-center">
+                                U# 
+                                <span id="ArrowUp0" class="cursor-pointer ml-1">▲</span>
+                                <span id="ArrowDown0" class="cursor-pointer ml-1">▼</span>
+                            </th>
+                            <th class="px-4 py-2 border-b text-left">
+                                First Name 
+                                <span id="ArrowUp1" class="cursor-pointer ml-1">▲</span>
+                                <span id="ArrowDown1" class="cursor-pointer ml-1">▼</span>
+                            </th>
+                            <th class="px-4 py-2 border-b text-left">
+                                Last Name 
+                                <span id="ArrowUp2" class="cursor-pointer ml-1">▲</span>
+                                <span id="ArrowDown2" class="cursor-pointer ml-1">▼</span>
+                            </th>
+                            <th class="px-4 py-2 border-b text-center">
+                                State 
+                                <span id="ArrowUp3" class="cursor-pointer ml-1">▲</span>
+                                <span id="ArrowDown3" class="cursor-pointer ml-1">▼</span>
+                            </th>
+                            <th class="px-4 py-2 border-b text-center">
+                                Major 
+                                <span id="ArrowUp4" class="cursor-pointer ml-1">▲</span>
+                                <span id="ArrowDown4" class="cursor-pointer ml-1">▼</span>
+                            </th>
+                            <th class="px-4 py-2 border-b text-center">
+                                Test Score 
+                                <span id="ArrowUp5" class="cursor-pointer ml-1">▲</span>
+                                <span id="ArrowDown5" class="cursor-pointer ml-1">▼</span>
+                            </th>
+                            <th class="px-4 py-2 border-b text-center">
+                                Test Date 
+                                <span id="ArrowUp6" class="cursor-pointer ml-1">▲</span>
+                                <span id="ArrowDown6" class="cursor-pointer ml-1">▼</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="http://139.62.210.181/~dc201341/index.html" class="text-blue-600 hover:text-blue-800 underline">
+                Visit My ePortfolio
+            </a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
